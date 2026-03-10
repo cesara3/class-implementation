@@ -1,36 +1,57 @@
+
 import random
 import matplotlib.pyplot as plt
 from collections import Counter
 
-trials = 100  # number of experiments
-n = 3           # number of coin flips per experiment
-
-results = []    # store number of heads from each experiment
-
-for trial in range(trials):
+# --------------------------------------------
+# Run one experiment of n coin flips
+# Returns the number of heads
+# --------------------------------------------
+def flip_coins_once(n):
     heads = 0
-    for flip in range(n):
+    for _ in range(n):
         if random.choice(["H", "T"]) == "H":
             heads += 1
-    results.append(heads)
-
-# Print average number of heads
-print("Average heads:", sum(results) / trials)
-
-# Print how many times each outcome occurred
-"""
-The computer flipped 3 coins 1000 different times.
-The number before the colon is how many heads happened.
-The number after the colon is how many times that happened.
-"""
-print("Frequency count:", Counter(results))
-
-# Histogram
-plt.hist(results, bins=range(n+2), align='left')
-plt.xlabel("Number of Heads")
-plt.ylabel("Frequency")
-plt.title(f"Histogram of Heads in {n} Coin Flips")
-plt.show()
+    return heads
 
 
+# --------------------------------------------
+# Run many experiments
+# Returns a list of head counts
+# --------------------------------------------
+def run_coin_experiments(trials, n):
+    results = []
+    for i in range(trials):
+        results.append(flip_coins_once(n))
+    return results
 
+
+# --------------------------------------------
+# Print summary information
+# --------------------------------------------
+def print_summary(results):
+    print("Average heads:", round(sum(results) / len(results), 4))
+    print("Frequency count:", Counter(results))
+
+
+# --------------------------------------------
+# Plot histogram
+# --------------------------------------------
+def plot_histogram(results, n):
+    plt.hist(results, bins=range(n + 2), align='left', edgecolor='black')
+    plt.xlabel("Number of Heads")
+    plt.ylabel("Frequency")
+    plt.title(f"Histogram of Heads in {n} Coin Flips")
+    plt.xticks(range(n + 1))
+    plt.show()
+
+
+# --------------------------------------------
+# Main program
+# --------------------------------------------
+trials = 100
+n = 3
+
+results = run_coin_experiments(trials, n)
+print_summary(results)
+plot_histogram(results, n)
