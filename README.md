@@ -66,7 +66,7 @@ Students are encouraged to understand why methods work before relying on softwar
 
 ## PDF Notes
 
-- [Complex Numbers Notes](./notes/Complex%20Numbers.pdf)
+- - [Complex Numbers Notes](./notes/Complex_Numbers.pdf)
 
 - [Trigonometric Functions Review](./notes/Review%20of%20Trigonometric%20Functions.pdf)
 
